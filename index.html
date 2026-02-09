@@ -3,88 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Tayland #Zirve | Garantili Versiyon</title>
+    <title>Tayland #Zirve</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
             --wa: #25D366; --tg: #229ED9; --dc: #5865F2; --gh: #ffffff;
-            --border: rgba(255, 255, 255, 0.1);
+            --border: rgba(255, 255, 255, 0.12);
         }
 
-        /* Sayfayı Ortala */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
         
-        body, html { 
-            height: 100%; width: 100%;
-            display: flex; justify-content: center; align-items: center;
-            overflow: hidden; background: #000; 
-        }
-
-        /* 1. ARKA PLAN VİDEOSU (Garantili Yöntem) */
-        #video-bg {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover; /* Ekranı tam kaplaması için */
-            z-index: -1; /* Her şeyin arkasında */
-            filter: brightness(0.5); /* Videoyu karartır */
-        }
-
-        /* 2. ÖN PANEL (Ortalanmış ve Şeffaf) */
-        .glass-card {
-            width: 90%; max-width: 360px;
-            background: rgba(0, 0, 0, 0.3); /* Başlangıçta hafif siyah */
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: 35px; padding: 40px 20px;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        /* Ekranı tam kapla ve içeriği ortala */
+        body { 
+            background: #000; 
+            height: 100vh; 
+            width: 100vw;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            overflow: hidden; 
             position: relative;
+        }
+
+        /* Video Arka Planı - Tam Ekran */
+        #bg-video { 
+            position: fixed; 
+            top: 50%; 
+            left: 50%; 
+            min-width: 100%; 
+            min-height: 100%; 
+            width: auto; 
+            height: auto; 
+            z-index: -1; 
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover; 
+            filter: brightness(0.4); 
+        }
+
+        .glass-card {
+            width: 90%; 
+            max-width: 360px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid var(--border);
+            border-radius: 35px; 
+            padding: 35px 20px; 
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
             z-index: 10;
         }
 
-        .avatar { width: 90px; height: 90px; border-radius: 50%; border: 1px solid var(--border); margin-bottom: 15px; }
-        h1 { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 25px; }
+        @keyframes slideUp { 
+            from { opacity: 0; transform: translateY(30px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        .avatar { width: 85px; height: 85px; border-radius: 50%; border: 2px solid var(--border); margin-bottom: 12px; object-fit: cover; }
+        h1 { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 15px; letter-spacing: -0.5px; }
 
         /* Rozetler */
         .badges-wrapper {
-            display: flex; justify-content: center; gap: 20px; 
-            margin-bottom: 30px; background: rgba(255, 255, 255, 0.03);
-            padding: 12px 20px; border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            width: fit-content; margin: 0 auto 30px;
+            display: flex; justify-content: center; align-items: center;
+            gap: 15px; margin: 0 auto 25px auto;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 12px 15px; border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            width: fit-content;
         }
-        .badge-box img { height: 24px; transition: 0.3s; }
-        .badge-box:hover img { transform: scale(1.2); }
 
+        .badge-box img { height: 26px; transition: 0.3s; }
+        
         /* Sosyal Butonlar */
-        .social-grid { display: flex; justify-content: center; gap: 10px; margin-bottom: 35px; }
+        .social-grid { display: flex; justify-content: center; gap: 12px; margin-bottom: 30px; }
         .s-btn {
-            width: 50px; height: 50px; border-radius: 15px;
+            width: 50px; height: 50px; border-radius: 16px;
             background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border);
             display: flex; align-items: center; justify-content: center;
             font-size: 20px; color: #fff; text-decoration: none; transition: 0.3s;
         }
+        .s-btn:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-3px); }
+        
         .whatsapp i { color: var(--wa); }
         .telegram i { color: var(--tg); }
         .discord i { color: var(--dc); }
         .github i { color: var(--gh); }
 
-        /* Sliderlar */
-        .settings { margin-top: 10px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.05); }
-        .slider-row { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .slider-row i { color: rgba(255,255,255,0.2); font-size: 14px; width: 20px; }
-        input[type="range"] { flex: 1; height: 4px; border-radius: 10px; background: rgba(255, 255, 255, 0.1); appearance: none; outline: none; accent-color: #fff; }
+        /* Ayarlar */
+        .settings-area { margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); }
+        .slider-item { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
+        input[type="range"] { flex: 1; accent-color: #fff; cursor: pointer; }
 
-        #hint { position: fixed; bottom: 20px; color: rgba(255,255,255,0.1); font-size: 10px; letter-spacing: 2px; }
+        #click-hint { 
+            position: fixed; 
+            bottom: 30px; 
+            color: rgba(255,255,255,0.3); 
+            font-size: 10px;letter-spacing: 3px; 
+            text-transform: uppercase;
+            font-weight: 700;
+            pointer-events: none;
+        }
     </style>
 </head>
-<body onclick="start()">
+<body onclick="unmuteAll()">
 
-    <video id="video-bg" loop playsinline autoplay muted>
+    <video id="bg-video" loop playsinline autoplay muted>
         <source src="video.mp4" type="video/mp4">
     </video>
 
@@ -92,11 +118,14 @@
         <img src="profil.jpg" alt="Avatar" class="avatar">
         <h1>Tayland #Zirve</h1>
         
-        <div class="badges-wrapper"><div class="badge-box"><img src="https://skillicons.dev/icons?i=kali"></div>
-            <div class="badge-box"><img src="https://skillicons.dev/icons?i=linux"></div>
-            <div class="badge-box"><img src="https://skillicons.dev/icons?i=mysql"></div>
-            <div class="badge-box"><img src="https://skillicons.dev/icons?i=py"></div>
+        <div class="badges-wrapper">
+            <div class="badge-box" data-label="Kali Linux"><img src="https://skillicons.dev/icons?i=kali"></div>
+            <div class="badge-box" data-label="Linux"><img src="https://skillicons.dev/icons?i=linux"></div>
+            <div class="badge-box" data-label="SQL"><img src="https://skillicons.dev/icons?i=mysql"></div>
+            <div class="badge-box" data-label="Python"><img src="https://skillicons.dev/icons?i=py"></div>
         </div>
+        
+        <p style="color: #aaa; font-size: 13px; margin-bottom: 25px;">Sıradan birisi.</p>
         
         <div class="social-grid">
             <a href="https://wa.me/905XXXXXXXXX" target="_blank" class="s-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
@@ -105,45 +134,43 @@
             <a href="https://github.com" target="_blank" class="s-btn github"><i class="fab fa-github"></i></a>
         </div>
 
-        <div class="settings">
-            <div class="slider-row">
-                <i class="fas fa-volume-up"></i>
-                <input type="range" id="vol-ctrl" min="0" max="1" step="0.01" value="0">
+        <div class="settings-area">
+            <div class="slider-item">
+                <i class="fas fa-volume-high" style="color: #fff; font-size: 12px;"></i>
+                <input type="range" id="v-control" min="0" max="1" step="0.01" value="0">
             </div>
-            <div class="slider-row">
-                <i class="fas fa-eye"></i>
-                <input type="range" id="opa-ctrl" min="0" max="0.9" step="0.01" value="0.3">
+            <div class="slider-item">
+                <i class="fas fa-eye" style="color: #fff; font-size: 12px;"></i>
+                <input type="range" id="o-control" min="0.1" max="0.9" step="0.01" value="0.6">
             </div>
         </div>
     </div>
 
-    <div id="hint">AKTİF ETMEK İÇİN DOKUN</div>
+    <div id="click-hint">Müziği Açmak İçin Dokun</div>
 
     <script>
-        const v = document.getElementById('video-bg');
-        const c = document.getElementById('main-card');
-        const vs = document.getElementById('vol-ctrl');
-        const os = document.getElementById('opa-ctrl');
+        const video = document.getElementById('bg-video');
+        const card = document.getElementById('main-card');
+        const vol = document.getElementById('v-control');
+        const opa = document.getElementById('o-control');
+        const hint = document.getElementById('click-hint');
 
-        // Ses Sliderı
-        vs.addEventListener('input', (e) => {
-            v.muted = false;
-            v.volume = e.target.value;
-            document.getElementById('hint').style.opacity = '0';
+        vol.addEventListener('input', (e) => {
+            video.muted = false;
+            video.volume = e.target.value;
+            if(e.target.value > 0) hint.style.opacity = '0';
         });
 
-        // Şeffaflık Sliderı
-        os.addEventListener('input', (e) => {
-            c.style.background = rgba(0, 0, 0, ${e.target.value});
+        opa.addEventListener('input', (e) => {
+            card.style.background = rgba(0, 0, 0, ${e.target.value});
         });
 
-        function start() {
-            v.play(); // Videoyu zorla oynat
-            if(v.muted) {
-                v.muted = false;
-                v.volume = 0.5;
-                vs.value = 0.5;
-                document.getElementById('hint').style.opacity = '0';
+        function unmuteAll() {
+            if(video.muted) {
+                video.muted = false;
+                video.volume = 0.5;
+                vol.value = 0.5;
+                hint.style.opacity = '0';
             }
         }
     </script>
